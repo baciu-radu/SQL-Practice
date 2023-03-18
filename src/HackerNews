@@ -1,0 +1,52 @@
+SELECT * FROM hacker_news;
+
+SELECT title, score
+FROM hacker_news
+ORDER BY score DESC
+LIMIT 5;
+
+SELECT COUNT(*) AS 'Total Stories'
+FROM hacker_news;
+
+SELECT user, SUM(SCORE)
+FROM hacker_news
+GROUP BY user
+HAVING SUM(SCORE) > 200;
+
+SELECT SUM(score) AS 'TOTAL SCORE'
+FROM hacker_news;
+
+SELECT (517 + 309 + 304 + 282) / 6366.0 AS 'Dominating?';
+
+SELECT user, COUNT(*)
+FROM hacker_news
+WHERE url LIKE '%watch?v=dQw4w9WgXcQ%'
+GROUP BY 1
+ORDER BY 2 DESC;
+
+SELECT
+  COUNT (*), CASE
+    WHEN url LIKE '%github.com%' THEN 'GitHub'
+    WHEN url LIKE '%medium.com%' THEN 'Medium'
+    WHEN url LIKE '%nytimes.com%' THEN 'New York Times'
+    ELSE 'Other'
+  END AS 'Source'
+FROM hacker_news
+GROUP BY Source
+ORDER BY 2;
+
+SELECT timestamp,
+   strftime('%H', timestamp)
+FROM hacker_news
+GROUP BY 1
+LIMIT 20;
+
+SELECT
+   strftime('%H', timestamp) AS 'Hour',
+   ROUND(AVG(score)) AS 'Average score',
+   COUNT(*) AS 'No of stories'
+FROM hacker_news
+WHERE timestamp IS NOT NULL
+GROUP BY 1
+ORDER BY 2 DESC;
+
